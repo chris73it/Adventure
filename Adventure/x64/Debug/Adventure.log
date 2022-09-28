@@ -1,25 +1,7 @@
-﻿  main.cpp
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(6,1): error C2504: 'Character': base class undefined
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(13,17): error C2061: syntax error: identifier 'Character'
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(13,10): error C3668: 'Avatar::attack': method with override specifier 'override' did not override any base class methods
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(18,9): error C3668: 'Avatar::hit': method with override specifier 'override' did not override any base class methods
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(9,11): error C2614: 'Avatar': illegal member initialization: 'Character' is not a base or member
+﻿  Avatar.cpp
+  main.cpp
   Vampire.cpp
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(6,1): error C2504: 'Character': base class undefined
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(13,17): error C2061: syntax error: identifier 'Character'
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(13,10): error C3668: 'Avatar::attack': method with override specifier 'override' did not override any base class methods
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(18,9): error C3668: 'Avatar::hit': method with override specifier 'override' did not override any base class methods
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(9,11): error C2614: 'Avatar': illegal member initialization: 'Character' is not a base or member
   Werewolf.cpp
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(6,1): error C2504: 'Character': base class undefined
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(13,17): error C2061: syntax error: identifier 'Character'
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(13,10): error C3668: 'Avatar::attack': method with override specifier 'override' did not override any base class methods
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(18,9): error C3668: 'Avatar::hit': method with override specifier 'override' did not override any base class methods
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(9,11): error C2614: 'Avatar': illegal member initialization: 'Character' is not a base or member
   Zombie.cpp
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(6,1): error C2504: 'Character': base class undefined
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(13,17): error C2061: syntax error: identifier 'Character'
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(13,10): error C3668: 'Avatar::attack': method with override specifier 'override' did not override any base class methods
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(18,9): error C3668: 'Avatar::hit': method with override specifier 'override' did not override any base class methods
-C:\Users\csasso\source\repos\Adventure\Adventure\Avatar.h(9,11): error C2614: 'Avatar': illegal member initialization: 'Character' is not a base or member
   Generating Code...
+  Adventure.vcxproj -> C:\Users\csasso\source\repos\Adventure\x64\Debug\Adventure.exe
