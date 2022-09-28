@@ -18,8 +18,12 @@ public:
 
 	virtual void attack(Character* ) =0;
 	virtual int hit(int strength) = 0;
-	virtual std::string getName()
+	std::string getName()
 	{
 		return m_name;
+	}
+	int getHealth()
+	{
+		return m_health;
 	}
 };
