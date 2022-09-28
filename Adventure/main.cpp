@@ -9,8 +9,8 @@
 Avatar hero{"Chris", 100, 25};
 
 std::vector<Character*> monsters = {
-	new Vampire{"Dracula", 15, 5},
-	new Werewolf{"Bartok", 10, 10},
+	//new Vampire{"Dracula", 15, 5},
+	//new Werewolf{"Bartok", 10, 10},
 	new Zombie{"Mr. Smith", 5, 20}
 };
 
@@ -19,7 +19,10 @@ int main()
 	//1. Initialize data structures
 
 	//2. Print on the screen what monsters are left, their energy and the hero's energy as well
-	std::cout << "These are the monsters still alive: ";
+	if (monsters.size() == 1)
+		std::cout << "There is one single monster still alive: ";
+	else
+		std::cout << "There are " << monsters.size() << " monsters still alive: ";
 	for (size_t index = 0; index < monsters.size() -1; index++)
 	{
 		std::cout << monsters[index]->getName() << ", ";
