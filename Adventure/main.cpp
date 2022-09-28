@@ -6,12 +6,12 @@
 #include "Werewolf.h"
 #include "Zombie.h"
 
-Avatar hero{100, 25};
+Avatar hero{"Chris", 100, 25};
 
 std::vector<Character*> monsters = {
-	new Vampire{15, 5},
-	new Werewolf{10, 10},
-	new Zombie{5, 20}
+	new Vampire{"Dracula", 15, 5},
+	new Werewolf{"Bartok", 10, 10},
+	new Zombie{"Mr. Smith", 5, 20}
 };
 
 int main()
@@ -19,6 +19,12 @@ int main()
 	//1. Initialize data structures
 
 	//2. Print on the screen what monsters are left, their energy and the hero's energy as well
+	std::cout << "These are the monsters still alive: ";
+	for (size_t index = 0; index < monsters.size() -1; index++)
+	{
+		std::cout << monsters[index]->getName() << ", ";
+	}
+	std::cout << monsters[monsters.size()-1]->getName() << "." << std::endl;
 
 	//3. Ask the player what weapons s/he wants to use
 

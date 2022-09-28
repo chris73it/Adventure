@@ -1,7 +1,7 @@
 #include "Werewolf.h"
 
-Werewolf::Werewolf(int _health, int _strength)
-    : Character{ _health, _strength }
+Werewolf::Werewolf(std::string _name, int _health, int _strength)
+    : Character{ _name, _health, _strength }
 {
 }
 

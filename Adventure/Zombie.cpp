@@ -1,7 +1,7 @@
 #include "Zombie.h"
 
-Zombie::Zombie(int _health, int _strength)
-    : Character{ _health, _strength }
+Zombie::Zombie(std::string _name, int _health, int _strength)
+    : Character{ _name, _health, _strength }
 {
 }
 

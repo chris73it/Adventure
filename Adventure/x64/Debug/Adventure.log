@@ -1,7 +1,7 @@
 ﻿  Avatar.cpp
-  main.cpp
   Vampire.cpp
   Werewolf.cpp
   Zombie.cpp
+  main.cpp
   Generating Code...
   Adventure.vcxproj -> C:\Users\csasso\source\repos\Adventure\x64\Debug\Adventure.exe

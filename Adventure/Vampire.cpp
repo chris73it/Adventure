@@ -1,7 +1,7 @@
 #include "Vampire.h"
 
-Vampire::Vampire(int _health, int _strength)
-    : Character{ _health, _strength }
+Vampire::Vampire(std::string _name, int _health, int _strength)
+    : Character{ _name, _health, _strength }
 {
 }
 

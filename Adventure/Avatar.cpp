@@ -1,7 +1,7 @@
 #include "Avatar.h"
 
-Avatar::Avatar(int _health, int _strength)
-    : Character{ _health, _strength }
+Avatar::Avatar(std::string _name, int _health, int _strength)
+    : Character{ _name, _health, _strength }
 {
 }
 

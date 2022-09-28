@@ -4,7 +4,7 @@
 class Vampire : public Character
 {
 public:
-    Vampire(int _health, int _strength);
+    Vampire(std::string _name, int _health, int _strength);
     void attack(Character* avatar) override;
     int hit(int _strength) override;
 };
