@@ -58,7 +58,7 @@ int main(int argc, char** argv)
 	}
 	std::cout << std::endl;
 
-	//3. Ask the player what weapons s/he wants to use
+	//3. Ask the player what monster s/he wants to attack
 	int choice;
 	std::cout << "What monster do you want to attack? ";
 	std::cin >> choice;
