@@ -56,14 +56,41 @@ int main(int argc, char** argv)
 			<< monsters[index]->getName()
 			<< "\t" << monsterEnergy(index) << std::endl;
 	}
-	std::cout << std::endl;
 
 	//3. Ask the player what monster s/he wants to attack
-	int choice;
-	std::cout << "What monster do you want to attack? ";
-	std::cin >> choice;
+	bool repeatInput = true;
+	std::string choice;
+	while (repeatInput)
+	{
+		std::cout << std::endl;
 
-	//4. Check if the current monster is dead, in which case move to the next monster
+		std::cout << "What monster do you want to attack? ";
+		std::cin >> choice;
+
+		//4. Make sure choice is sound: for instance, if there are only 3 monsters, the player
+		//   should only be allowed to type a b or c, and not d ... z.
+		if (choice.length() != 1)
+		{
+			std::cerr << "Please, enter a single letter between a and " << alphabet[monsterSize - 1] << std::endl;
+			continue;
+		}
+		
+		//Convert A .. Z to a .. z
+		if (choice[0] >= 'A' && choice[0] <= 'Z')
+		{
+			int asciiChoiceIndex = (int)choice[0] + ('a' - 'A');
+			choice = alphabet[asciiChoiceIndex - 'a'];
+		}
+
+		if (choice[0] < 'a' || choice[0] > alphabet[monsterSize - 1])
+		{
+			std::cerr << "Please, enter a letter between a and " << alphabet[monsterSize - 1] << std::endl;
+			continue;
+		}
+
+		//Input is correct, so no need to keep looping
+		repeatInput = false;
+	}
 
 	//5. If the current monster is NOT dead, have it attack the avatar
 
