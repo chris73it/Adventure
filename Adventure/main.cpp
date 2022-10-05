@@ -1,3 +1,4 @@
+#include <string>
 #include <iostream>
 #include <vector>
 #include "Character.h"
@@ -6,34 +7,61 @@
 #include "Werewolf.h"
 #include "Zombie.h"
 
-Avatar hero{"Chris", 100, 25};
+Avatar hero{"Chris", 100, 12};
 
 std::vector<Character*> monsters = {
-	new Vampire{"Dracula", 15, 5},
-	new Werewolf{"Bartok", 10, 10},
-	new Zombie{"Mr. Smith", 5, 20}
+	new Vampire{"Dracula", 15, 20},
+	new Werewolf{"Bartok", 18, 15},
+	new Zombie{"Mr. Smith",24, 10}
 };
 
-int main()
+std::string monsterEnergy(size_t index)
 {
+	return std::string(" (energy: ") + std::to_string(monsters[index]->getHealth()) + std::string(")");
+}
+
+std::string monsterBanner(size_t monsterSize)
+{
+	if (monsterSize == 1)
+		return std::string("There is one single monster still alive: ");
+	else
+		return std::string("There are ") + std::to_string(monsterSize) + std::string(" monsters still alive: ");
+}
+
+char* getAlphabet()
+{
+	char* alphabet = new char[26];
+	for (size_t letter = 'a'; letter <= 'z'; letter++)
+	{
+		alphabet[letter - 'a'] = (int)letter;
+	}
+	return alphabet;
+}
+
+int main(int argc, char** argv)
+{
+	char* alphabet = getAlphabet();
+
 	//1. Print on the screen how the avatar is doing.
-	std::cout << hero.getName() << " has " << hero.getHealth() << " energy left." << std::endl;
+	std::cout << hero.getName() << " has " << hero.getHealth() << " energy left." << std::endl << std::endl;
 
 	//2. Print on the screen what monsters are left, their energy and the hero's energy as well
-	if (monsters.size() == 1)
-		std::cout << "There is one single monster still alive: ";
-	else
-		std::cout << "There are " << monsters.size() << " monsters still alive: ";
-	for (size_t index = 0; index < monsters.size() -1; index++)
+	auto monsterSize = monsters.size();
+	std::cout << monsterBanner(monsterSize);
+	std::cout << std::endl;
+	size_t index;
+	for (index = 0; index < monsterSize; index++)
 	{
-		std::cout << monsters[index]->getName()
-			<< " (energy: " << monsters[index]->getHealth() << "), ";
+		std::cout << "  [" << alphabet[index] << "] "
+			<< monsters[index]->getName()
+			<< "\t" << monsterEnergy(index) << std::endl;
 	}
-	std::cout << monsters[monsters.size()-1]->getName()
-		<< " (energy: " << monsters[monsters.size() - 1]->getHealth() << ")."
-		<< std::endl;
+	std::cout << std::endl;
 
 	//3. Ask the player what weapons s/he wants to use
+	int choice;
+	std::cout << "What monster do you want to attack? ";
+	std::cin >> choice;
 
 	//4. Check if the current monster is dead, in which case move to the next monster
 
