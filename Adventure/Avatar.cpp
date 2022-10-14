@@ -5,11 +5,15 @@ Avatar::Avatar(std::string _name, int _health, int _strength)
 {
 }
 
-void Avatar::attack(Character* monster)
+void Avatar::attack(Character* _monster)
 {
+    int monsterHealthAfterAttack = hit(_monster);
+    _monster->setHealth(monsterHealthAfterAttack);
 }
 
-int Avatar::hit(int strength)
+int Avatar::hit(Character* _monster)
 {
-    return 0;
+    int monsterHealth = _monster->getHealth();
+    monsterHealth -= m_attackStrength;
+    return monsterHealth;
 }

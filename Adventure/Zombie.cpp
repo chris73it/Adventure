@@ -5,12 +5,15 @@ Zombie::Zombie(std::string _name, int _health, int _strength)
 {
 }
 
-void Zombie::attack(Character* avatar)
+void Zombie::attack(Character* _avatar)
 {
-
+    int avatarHealthAfterAttack = hit(_avatar);
+    _avatar->setHealth(avatarHealthAfterAttack);
 }
 
-int Zombie::hit(int _strength)
+int Zombie::hit(Character* _avatar)
 {
-    return 0;
+    int avatarHealth = _avatar->getHealth();
+    avatarHealth -= m_attackStrength;
+    return avatarHealth;
 }

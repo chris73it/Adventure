@@ -7,6 +7,6 @@ class Werewolf :
 public:
     Werewolf(std::string _name, int _health, int _strength);
     void attack(Character* avatar) override;
-    int hit(int _strength) override;
+    int hit(Character* _character) override;
 };
 

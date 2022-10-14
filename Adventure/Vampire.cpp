@@ -7,11 +7,13 @@ Vampire::Vampire(std::string _name, int _health, int _strength)
 
 void Vampire::attack(Character* _avatar)
 {
-    _avatar->hit(m_strength);
+    int avatarHealthAfterAttack = hit(_avatar);
+    _avatar->setHealth(avatarHealthAfterAttack);
 }
 
-int Vampire::hit(int _strength)
+int Vampire::hit(Character* _avatar)
 {
-    m_health -= _strength;
-    return m_health;
+    int avatarHealth = _avatar->getHealth();
+    avatarHealth -= m_attackStrength;
+    return avatarHealth;
 }

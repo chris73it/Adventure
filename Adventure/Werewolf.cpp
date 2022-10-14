@@ -5,12 +5,15 @@ Werewolf::Werewolf(std::string _name, int _health, int _strength)
 {
 }
 
-void Werewolf::attack(Character* avatar)
+void Werewolf::attack(Character* _avatar)
 {
-
+    int avatarHealthAfterAttack = hit(_avatar);
+    _avatar->setHealth(avatarHealthAfterAttack);
 }
 
-int Werewolf::hit(int _strength)
+int Werewolf::hit(Character* _avatar)
 {
-    return 0;
+    int avatarHealth = _avatar->getHealth();
+    avatarHealth -= m_attackStrength;
+    return avatarHealth;
 }
