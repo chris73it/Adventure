@@ -6,7 +6,7 @@ class Avatar :
 {
 public:
     Avatar(std::string _name, int _health, int _strength);
-    void attack(Character* _monster) override;
+    int attack(Character* _monster) override;
     int hit(Character* _monster) override;
 };
 

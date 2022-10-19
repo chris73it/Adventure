@@ -5,10 +5,11 @@ Vampire::Vampire(std::string _name, int _health, int _strength)
 {
 }
 
-void Vampire::attack(Character* _avatar)
+int Vampire::attack(Character* _avatar)
 {
     int avatarHealthAfterAttack = hit(_avatar);
     _avatar->setHealth(avatarHealthAfterAttack);
+    return m_attackStrength;
 }
 
 int Vampire::hit(Character* _avatar)

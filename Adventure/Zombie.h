@@ -6,7 +6,7 @@ class Zombie :
 {
 public:
     Zombie(std::string _name, int _health, int _strength);
-    void attack(Character* avatar) override;
+    int attack(Character* avatar) override;
     int hit(Character* _character) override;
 };
 

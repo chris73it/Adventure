@@ -7,12 +7,14 @@
 #include "Werewolf.h"
 #include "Zombie.h"
 
-Avatar avatar{"Chris", 100, 12};
+Avatar avatar{"Chris", 81, 12};
+char* alphabet;
+size_t monstersLeft;
 
 std::vector<Character*> monsters = {
-	new Vampire{"Dracula", 15, 20},
+	new Vampire{"Dracula", 10, 20},
 	new Werewolf{"Bartok", 18, 15},
-	new Zombie{"Mr. Smith",24, 10}
+	new Zombie{"Mr. Smith",30, 10}
 };
 
 std::string monsterEnergy(size_t index)
@@ -20,12 +22,12 @@ std::string monsterEnergy(size_t index)
 	return std::string(" (health: ") + std::to_string(monsters[index]->getHealth()) + std::string(")");
 }
 
-std::string monsterBanner(size_t monsterSize)
+std::string monsterBanner(size_t monstersLeft)
 {
-	if (monsterSize == 1)
+	if (monstersLeft == 1)
 		return std::string("There is one single monster still alive: ");
 	else
-		return std::string("There are ") + std::to_string(monsterSize) + std::string(" monsters still alive: ");
+		return std::string("There are ") + std::to_string(monstersLeft) + std::string(" monsters still alive: ");
 }
 
 static char* getAlphabet()
@@ -34,7 +36,7 @@ static char* getAlphabet()
 	if (!alphabet)
 	{
 		alphabet = new char[26];
-		std::cout << "alphabet pointer is not null." << std::endl;
+		//std::cerr << "alphabet pointer is not null." << std::endl;
 	}
 	for (size_t letter = 'a'; letter <= 'z'; letter++)
 	{
@@ -43,24 +45,42 @@ static char* getAlphabet()
 	return alphabet;
 }
 
+void pleasePressAOnce()
+{
+	std::cerr << "Please, press 'a' once to attack " << monsters[0]->getName() << "." << std::endl;
+}
+
+void pleaseEnterSingleLetter()
+{
+	std::cerr << "Please, enter a single letter between 'a' and '" << alphabet[monstersLeft - 1] << "'. " << std::endl;
+}
+
 int main(int argc, char** argv)
 {
-	char* alphabet = getAlphabet();
-
-	//1. Print on the screen how the avatar is doing.
-	std::cout << avatar.getName() << " has " << avatar.getHealth() << " health left." << std::endl << std::endl;
+	alphabet = getAlphabet();
 
 	//2. Ask player wha monster s/he wants to attack.
 	std::string choice;
-	bool repeatInput = true;
-	while (repeatInput)
+	while (true)
 	{
+		std::cout << std::endl << "################################################################"
+			<< std::endl << std::endl;
+		
+		monstersLeft = monsters.size();
+
+		if (monstersLeft == 0 || avatar.getHealth() <= 0)
+		{
+			break;
+		}
+
+		//1. Print on the screen how the avatar is doing.
+		std::cout << avatar.getName() << " has " << avatar.getHealth() << " health left." << std::endl;
+
 		std::cout << std::endl;
 
 		//3. Print on the screen what monsters are left, their health and the hero's health as well
-		auto monsterSize = monsters.size();
-		std::cout << monsterBanner(monsterSize) << std::endl;
-		for (size_t index = 0; index < monsterSize; index++)
+		std::cout << monsterBanner(monstersLeft) << std::endl;
+		for (size_t index = 0; index < monstersLeft; index++)
 		{
 			std::cout << "  [" << alphabet[index] << "] "
 				<< monsters[index]->getName()
@@ -76,13 +96,13 @@ int main(int argc, char** argv)
 		//   should only be allowed to type a b or c, and not d ... z, or random characters like semicolon, or digits.
 		if (choice.length() != 1)
 		{
-			if (monsterSize == 1)
+			if (monstersLeft == 1)
 			{
-				std::cerr << "Please, press 'a' once to attack " << monsters[0]->getName() << "." << std::endl;
+				pleasePressAOnce();
 			}
 			else
 			{
-				std::cerr << "Please, enter a single letter between 'a' and '" << alphabet[monsterSize - 1] << "'. " << std::endl;
+				pleaseEnterSingleLetter();
 			}
 			continue;
 		}
@@ -94,46 +114,60 @@ int main(int argc, char** argv)
 			choice = alphabet[asciiChoiceIndex - 'a'];
 		}
 
-		if (monsterSize == 1 && choice[0] != 'a')
+		if (monstersLeft == 1 && choice[0] != 'a')
 		{
-			std::cerr << "Please, press a to attack " << monsters[0]->getName() << "." << std::endl;
+			pleasePressAOnce();
 			continue;
 		}
 
-		if (choice[0] < 'a' || choice[0] > alphabet[monsterSize - 1])
+		if (choice[0] < 'a' || choice[0] > alphabet[monstersLeft - 1])
 		{
-			std::cerr << "Please, enter a letter between a and " << alphabet[monsterSize - 1] << std::endl;
+			pleaseEnterSingleLetter();
 			continue;
 		}
 
 		//6. Attack the chosen monster and check its health.
 		size_t currentMonsterIndex = choice[0] - 'a';
 		Character* currentMonster = monsters[currentMonsterIndex];
-		avatar.attack(currentMonster);
+		int avatarAttack = avatar.attack(currentMonster);
 		if (currentMonster->getHealth() <= 0)
 		{
 			std::cout << avatar.getName() << " killed " << currentMonster->getName() << "." << std::endl;
 			monsters.erase(monsters.begin() + currentMonsterIndex);
-			continue;
+			monstersLeft--;
 		}
 		else
 		{
-			std::cout << avatar.getName() << " attacked " << currentMonster->getName()
-				<< " (health: " << currentMonster->getHealth() << ".)" << std::endl;
+			std::cout << avatar.getName() << " attacked (strength: " << avatarAttack << ") "
+				<< currentMonster->getName() << "." << std::endl;
 		}
 
-		//7. Since the monster is still alive, make the monster attack the avatar.
-		// ...
-		
-		//Input is correct, so no need to keep looping
-		//repeatInput = false;
+		//7. Since at least one monster is still alive, make the monster attack the avatar.
+		for (size_t index = 0; index < monstersLeft; index++)
+		{
+			int monsterAttack = monsters[index]->attack(&avatar);
+			if (avatar.getHealth() <= 0)
+			{
+				std::cout << monsters[index]->getName() << " killed " << avatar.getName() << "." << std::endl;
+				break;
+			}
+			else
+			{
+				std::cout << monsters[index]->getName() << " attacked (strength: " << monsterAttack << ") "
+					<< avatar.getName() << "." << std::endl;
+			}
+		}
 	}
 
-	//5. If the current monster is NOT dead, have it attack the avatar
-
-	//6. If the avatar is dead, then it is GAME OVER
-
-	//7. If there are no more monsters (they are all dead) then VICTORY!
+	//8. Game is over: did the avatar win or did the monsters kill the hero?
+	if (avatar.getHealth() <= 0)
+	{
+		std::cout << "GAME OVER" << std::endl;
+	}
+	else
+	{
+		std::cout << "All monsters are dead!" << std::endl;
+	}
 
 	return 0;
 }

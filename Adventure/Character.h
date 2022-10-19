@@ -16,7 +16,7 @@ public:
 
 	~Character() {}
 
-	virtual void attack(Character* ) =0;
+	virtual int attack(Character* ) =0;
 	virtual int hit(Character* _character) =0;
 
 	std::string getName()
